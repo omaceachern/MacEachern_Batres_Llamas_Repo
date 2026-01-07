@@ -1,1 +1,27 @@
-þÿ
+Milestone #1: Spoon Game
+Victoria Batres, Itzel Llamas, and Olivia MacEachern
+
+Functionality:
+Problem: We are trying to create a program for the Spoon Game to keep track of current active players and those who are eliminated. Within this system, students will be able to self report themselves as eliminated or successful and the automatically be given their next target
+
+Description of target user: The target user would be anyone participating in the spoon game including forum, students, and faculty. 
+
+Description of programs functionality: 
+Core features: 
+Keeps track of who is eliminated and who is still in the game
+Students are able to self-report who they have eliminated
+Inputs/outputs:
+Inputs a csv file that contains information on every participant. The participants' names, grade (if applicable), and a value for if they are still in the game (0/1). 
+Outputs a notification of their target, along with how many people theyâ€™ve eliminated, and what round it is. 
+2-3 extra features: 
+Create a randomized passkey for each student so only they can report whether or not they are eliminated
+Create rounds in terms of number of people eliminated. For example, when 20 people are eliminated, round 1 is over. However, the survive the round, you need to have eliminated someone. 
+Task Planning:
+	Next steps?: 
+Creating a file with sample data, coding classes, testing code as a fake student, adding in additional components 
+	
+	Divided tasks:
+Itzel: tester class
+Victoria and Olivia: spoon class
+Feedback: 
+On the general structure of our code and if our approach makes sense
