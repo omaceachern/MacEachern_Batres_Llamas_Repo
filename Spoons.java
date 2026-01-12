@@ -111,25 +111,49 @@ public class Spoons {
         return statusMap.getOrDefault(name, 0);
     }
 
-        //Returns the target for a player based on their group
-        public String getTarget(String name) {
-            if (nines.contains(name)) return targets9.get(name);
-            if (tens.contains(name)) return targets10.get(name);
-            if (elevens.contains(name)) return targets11.get(name);
-            if (twelves.contains(name)) return targets12.get(name);
-            if (faculty.contains(name)) return targetsFaculty.get(name);
-            return null;
-        }
+    //Returns the target for a player based on their group
+    public String getTarget(String name) {
+        if (nines.contains(name)) return targets9.get(name);
+        if (tens.contains(name)) return targets10.get(name);
+        if (elevens.contains(name)) return targets11.get(name);
+        if (twelves.contains(name)) return targets12.get(name);
+        if (faculty.contains(name)) return targetsFaculty.get(name);
+        return null;
+    }
     
-        //Eliminate a player and update only their group map
-        public void eliminatePlayer(String name) {
-            if (!statusMap.containsKey(name) || statusMap.get(name) != 1) return; // already eliminated
-            statusMap.put(name, 0);
+    //Eliminate a player and update only their group map
+    public void eliminatePlayer(String name) {
+        if (!statusMap.containsKey(name) || statusMap.get(name) != 1) return; // already eliminated
+        statusMap.put(name, 0);
     
-            if (nines.contains(name)) targets9 = initializeTargets(nines);
-            else if (tens.contains(name)) targets10 = initializeTargets(tens);
-            else if (elevens.contains(name)) targets11 = initializeTargets(elevens);
-            else if (twelves.contains(name)) targets12 = initializeTargets(twelves);
-            else if (faculty.contains(name)) targetsFaculty = initializeTargets(faculty);
+        if (nines.contains(name)) targets9 = initializeTargets(nines);
+        else if (tens.contains(name)) targets10 = initializeTargets(tens);
+        else if (elevens.contains(name)) targets11 = initializeTargets(elevens);
+        else if (twelves.contains(name)) targets12 = initializeTargets(twelves);
+        else if (faculty.contains(name)) targetsFaculty = initializeTargets(faculty);
+    }
+
+// Returns true if 'name' is the only player left in their group
+public boolean isLastPlayerInGroup(String name) {
+    ArrayList<String> group = null;
+
+    if (nines.contains(name)) group = nines;
+    else if (tens.contains(name)) group = tens;
+    else if (elevens.contains(name)) group = elevens;
+    else if (twelves.contains(name)) group = twelves;
+    else if (faculty.contains(name)) group = faculty;
+
+    if (group == null) return false; // safety check
+
+    int activeCount = 0;
+    for (String player : group) {
+        if (statusMap.get(player) != null && statusMap.get(player) == 1) {
+            activeCount++;
         }
+    }
+
+    // If only 1 active player left, and it’s name --> return true
+    return activeCount == 1 && statusMap.get(name) == 1;
+}
+
 }

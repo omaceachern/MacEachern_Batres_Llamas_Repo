@@ -65,12 +65,21 @@ public class MainTester {
         if (choice == 1) {
             game.eliminatePlayer(player.getName());
             System.out.println(player.getName()+ " has been eliminated.");
+            //last player check
+            if (game.isLastPlayerInGroup(player.getName())) {
+                System.out.println("Congratulations " + player.getName() + "! You are the winner!");
+            }
         } else if (choice == 2) {
             System.out.print("Enter the name of the person you eliminated: ");
             String target = sc.nextLine();
             if (game.getStatus(target) == 0) {
                 game.eliminatePlayer(target);
                 System.out.println(target + " has been eliminated.");
+
+                //last player check
+                if (game.isLastPlayerInGroup(player.getName())) {
+                    System.out.println("Congratulations " + player.getName() + "! You are the winner!");
+                }
             } else {
                 System.out.println("Invalid target or already eliminated.");
             }
