@@ -91,7 +91,7 @@ public class Spoons {
         Map<String, String> map = new HashMap<>();
         List<String> activePlayers = new ArrayList<>();
         for (String player : group) {
-            if (statusMap.get(player) == 0) {
+            if (statusMap.get(player) == 1) {
                 activePlayers.add(player);
             }
         }
@@ -103,17 +103,6 @@ public class Spoons {
         }
         return map;
     }
-
-    // public Map<String, String> assignTargets(ArrayList<String> names){
-    //     Map<String, String> toRet = new HashMap<>();
-    //     for (int i=0;i<names.size();i++){
-    //         String player =names.get(i);
-    //         String target = names.get((i+1)%names.size());
-
-    //         toRet.put(player,target);
-    //     }
-    //     return toRet;
-    // }
 
     public int getStatus(String name){
         return statusMap.get(name);
@@ -131,8 +120,8 @@ public class Spoons {
     
         //Eliminate a player and update only their group map
         public void eliminatePlayer(String name) {
-            if (statusMap.get(name) != 0) return; // already eliminated
-            statusMap.put(name, 1);
+            if (statusMap.get(name) != 1) return; // already eliminated
+            statusMap.put(name, 0);
     
             if (nines.contains(name)) targets9 = initializeTargets(nines);
             else if (tens.contains(name)) targets10 = initializeTargets(tens);

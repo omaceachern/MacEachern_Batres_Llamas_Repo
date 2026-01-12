@@ -30,7 +30,7 @@ public class MainTester {
         //creates spoons object
         Spoons game = null;
         try {
-            game = new Spoons("/Users/vbatres/Desktop/CS_Seminar/MacEachern_Batres_Llamas_Repo/Spoon_Sample_Data - Sheet1.csv");
+            game = new Spoons("MacEachern_Batres_Llamas_Repo/Spoon_Sample_Data - Sheet1.csv");
         } catch (Exception exception) {
             System.out.println("Error!: " + exception.getMessage());
             sc.close();
