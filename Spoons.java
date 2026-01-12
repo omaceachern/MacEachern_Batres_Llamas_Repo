@@ -3,7 +3,6 @@ package MacEachern_Batres_Llamas_Repo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,12 +42,6 @@ public class Spoons {
         int name_idx=0;
         int grade_idx=1;
         int status_idx=2;
-
-        // ArrayList <String> nines = new ArrayList<>();
-        // ArrayList <String> tens = new ArrayList<>();
-        // ArrayList <String> elevens = new ArrayList<>();
-        // ArrayList <String> twelves = new ArrayList<>();
-        // ArrayList <String> faculty = new ArrayList<>();
         
         statusMap = new HashMap<>();
         nines = new ArrayList<>();
@@ -59,20 +52,20 @@ public class Spoons {
 
 
         while (sc.hasNextLine()) {
-            ArrayList<String> line = new ArrayList<>(Arrays.asList(sc.nextLine().split(",")));
-            String name = line.get(name_idx);
-            Integer grade = Integer.parseInt(line.get(grade_idx));
-            Integer status=Integer.parseInt(line.get(status_idx));
+            String[]line = sc.nextLine().split(",");
+            String name = line[name_idx].trim();
+            int grade = Integer.parseInt(line[grade_idx].trim());
+            int status=Integer.parseInt(line[status_idx].trim());
 
             statusMap.put(name, status);
 
-            if (grade.equals(9)) {
+            if (grade==9) {
                 nines.add(name);
-            } else if (grade.equals(10)) {
+            } else if (grade==10) {
                 tens.add(name);
-            } else if (grade.equals(11)){
+            } else if (grade==11){
                 elevens.add(name);
-            } else if (grade.equals(12)){
+            } else if (grade==12){
                 twelves.add(name);
             }else{
                 faculty.add(name);

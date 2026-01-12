@@ -21,7 +21,7 @@ public class MainTester {
         Scanner sc = new Scanner(System.in);
         // ask for user info
         System.out.print("What is your last name? (Please enter in the following format: Batres): ");
-        String name = sc.nextLine();
+        String name = sc.nextLine().trim();
 
         System.out.print("Enter your grade (9-12) or 0 if faculty: ");
         int grade = sc.nextInt();
