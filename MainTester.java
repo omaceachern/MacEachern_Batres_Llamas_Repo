@@ -79,6 +79,10 @@ public class MainTester {
                 if (game.isLastPlayerInGroup(player.getName())) {
                     System.out.println("Congratulations " + player.getName() + "! You are the winner!");
                 }
+                String newTarget = game.getTarget(player.getName());
+                if (newTarget != null) {
+                    System.out.println("Your current target is now: " + newTarget);
+                }
             } else if (choice == 2) {
                 System.out.print("Enter the name of the person you eliminated: ");
                 String target = sc.nextLine().trim();
