@@ -19,6 +19,7 @@ public class MainTester {
     
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        // ask for user info
         System.out.print("What is your last name? (Please enter in the following format: Batres): ");
         String name = sc.nextLine();
 
@@ -26,47 +27,54 @@ public class MainTester {
         int grade = sc.nextInt();
         sc.nextLine();
 
+        //creates spoons object
         Spoons game = null;
         try {
             game = new Spoons("/Users/vbatres/Desktop/CS_Seminar/MacEachern_Batres_Llamas_Repo/Spoon_Sample_Data - Sheet1.csv");
         } catch (Exception exception) {
             System.out.println("Error!: " + exception.getMessage());
+            sc.close();
             return;
         }
 
-        int status = game.getStatus(name);
+        //create a students object for the player
+        Students player = new Students(name,grade);
+
+        //check player's status
+        int status = game.getStatus(player.getName());
+
         if (status != 0) {
-            System.out.println("Sorry, you have been eliminated!");
+            System.out.println("Sorry, "+player.getName()+" you have been eliminated!");
+            sc.close();
             return;
         }
 
-        System.out.println("Welcome " + name + "! You are still in the game.");
+        System.out.println("Welcome " + player.getName() + "! You are still in the game.");
+        //show current target
+        System.out.println("Your current target is: " + game.getTarget(player.getName()));
 
+        //offer actions
         System.out.println("Choose an action:");
         System.out.println("1. Self-report elimination");
         System.out.println("2. Report someone else as eliminated");
+
         int choice = sc.nextInt();
         sc.nextLine();
 
+        //Use eliminatePlayer() to update only the correct group
         if (choice == 1) {
-            System.out.println("You reported yourself as eliminated.");
-            // Update Spoons status
-            game.statusMap.put(name, 1); // 1 = eliminated
-            System.out.println("Your status is now eliminated.");
-        } 
-        else if (choice == 2) {
+            game.eliminatePlayer(player.getName());
+            System.out.println(player.getName()+ " has been eliminated.");
+        } else if (choice == 2) {
             System.out.print("Enter the name of the person you eliminated: ");
             String target = sc.nextLine();
-        
-            // Check if target exists
-            if (game.statusMap.containsKey(target) && game.getStatus(target) == 0) {
-                game.statusMap.put(target, 1); // mark as eliminated
+            if (game.getStatus(target) == 0) {
+                game.eliminatePlayer(target);
                 System.out.println(target + " has been eliminated.");
             } else {
                 System.out.println("Invalid target or already eliminated.");
             }
-        } 
-        else {
+        } else {
             System.out.println("Invalid choice.");
         }
 
