@@ -94,8 +94,13 @@ public class MainTester {
                     }
                     //shows the updated target for the current player
                     System.out.println("Your current target is now: " + game.getTarget(player.getName()));
+                    // to wait before next turn
+                    System.out.println("\nPress Enter to end your turn and pass to the next player...");
+                    sc.nextLine(); // waits for user to hit enter
                 } else {
                     System.out.println("Invalid target or already eliminated.");
+                    System.out.println("\nPress Enter to end your turn...");
+                    sc.nextLine();
                 }
             } else {
                 System.out.println("Invalid choice. Turn skipped.");
