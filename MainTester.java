@@ -98,6 +98,8 @@ public class MainTester {
                     String nextTarget = game.getTarget(player.getName());
                     if (nextTarget == null) {
                         System.out.println("Congratulations " + player.getName() + "! You are the winner of your group!");
+                        System.out.println("\nPress Enter to continue...");
+                        sc.nextLine(); // wait for user to hit enter
                     } else {
                         System.out.println("Your current target is now: " + nextTarget);
                     }
