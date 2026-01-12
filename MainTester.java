@@ -20,33 +20,79 @@ public class MainTester {
     
     public static void main(String[] args) throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
-        // ask for user info
-        System.out.print("What is your last name? (Please enter in the following format: Batres): ");
-        String name = sc.nextLine().trim();
-
-        System.out.print("Enter your grade (9-12) or 0 if faculty: ");
-        int grade = sc.nextInt();
-        sc.nextLine();
 
         //creates spoons object
         Spoons game = new Spoons("MacEachern_Batres_Llamas_Repo/Spoon_Sample_Data - Sheet1.csv");
 
-        //create a students object for the player
-        Students player = new Students(name,grade);
+        System.out.println("Welcome to the Spoon Game!");
 
-        //check player's status
-        int status = game.getStatus(player.getName());
-
-        if (status == 0) {
-            System.out.println("Sorry, "+player.getName()+" you have been eliminated!");
-            sc.close();
-            return;
-        }
-
-        System.out.println("Welcome " + player.getName() + "! You are still in the game.");
-        
         while (true) {
-            //Check if all groups have winners*
+            // ask for user info
+            System.out.print("\nWhat is your last name? (Please enter in the following format: Batres): ");
+            String name = sc.nextLine().trim();
+
+            System.out.print("Enter your grade (9-12) or 0 if faculty: ");
+            int grade = 0;
+            try {
+                grade = Integer.parseInt(sc.nextLine().trim());
+            } catch (NumberFormatException exception) {
+                System.out.println("Invalid grade. Turn skipped.");
+                continue;
+            }
+
+            //create a students object for the player
+            Students player = new Students(name, grade);
+
+            //check player's status
+            int status = game.getStatus(player.getName());
+
+            if (status == 0) {
+                System.out.println("Sorry, " + player.getName() + " you have been eliminated!");
+                continue; // next player's turn
+            }
+
+            System.out.println("Welcome " + player.getName() + "! You are still in the game.");
+
+            //show current target
+            System.out.println("Your current target is: " + game.getTarget(player.getName()));
+
+            //offer actions
+            System.out.println("Choose an action:");
+            System.out.println("1. Self-report elimination");
+            System.out.println("2. Report someone else as eliminated");
+
+            String input = sc.nextLine().trim(); //reads what the user types
+            int choice = 0;
+            try {
+                choice = Integer.parseInt(input); //convert input to integer
+            } catch (NumberFormatException exception) {
+                choice = -1; // invalid input
+            }
+
+            //Use eliminatePlayer() to update only the correct group
+            if (choice == 1) {
+                game.eliminatePlayer(player.getName());
+                System.out.println(player.getName() + " has been eliminated.");
+                if (game.isLastPlayerInGroup(player.getName())) {
+                    System.out.println("Congratulations " + player.getName() + "! You are the winner!");
+                }
+            } else if (choice == 2) {
+                System.out.print("Enter the name of the person you eliminated: ");
+                String target = sc.nextLine().trim();
+                if (game.getStatus(target) == 1) {
+                    game.eliminatePlayer(target);
+                    System.out.println(target + " has been eliminated.");
+                    if (game.isLastPlayerInGroup(target)) {
+                        System.out.println("Congratulations " + target + "! They are the winner of their group!");
+                    }
+                } else {
+                    System.out.println("Invalid target or already eliminated.");
+                }
+            } else {
+                System.out.println("Invalid choice. Turn skipped.");
+            }
+
+            // Check if all groups have winners
             String winner9 = game.getWinnerInGroup(game.getNines());
             String winner10 = game.getWinnerInGroup(game.getTens());
             String winner11 = game.getWinnerInGroup(game.getElevens());
@@ -61,48 +107,10 @@ public class MainTester {
                 System.out.println("11th Grade: " + winner11);
                 System.out.println("12th Grade: " + winner12);
                 System.out.println("Faculty: " + winnerFaculty);
-                break; // all groups have winners --> end game
-            }
-
-        //show current target
-        System.out.println("Your current target is: " + game.getTarget(player.getName()));
-
-        //offer actions
-        System.out.println("Choose an action:");
-        System.out.println("1. Self-report elimination");
-        System.out.println("2. Report someone else as eliminated");
-
-        int choice = sc.nextInt();
-        sc.nextLine();
-
-        //Use eliminatePlayer() to update only the correct group
-        if (choice == 1) {
-            game.eliminatePlayer(player.getName());
-            System.out.println(player.getName()+ " has been eliminated.");
-            //last player check
-            if (game.isLastPlayerInGroup(player.getName())) {
-                System.out.println("Congratulations " + player.getName() + "! You are the winner!");
+                break;
             }
         }
-        else if (choice == 2) {
-            System.out.print("Enter the name of the person you eliminated: ");
-            String target = sc.nextLine().trim();
-            if (game.getStatus(target) == 1) {
-                game.eliminatePlayer(target);
-                System.out.println(target + " has been eliminated.");
 
-                //last player check
-                if (game.isLastPlayerInGroup(player.getName())) {
-                    System.out.println("Congratulations " + player.getName() + "! You are the winner!");
-                }
-            } else {
-                System.out.println("Invalid target or already eliminated.");
-            }
-        }
-        else {
-            System.out.println("Invalid choice.");
-        }
-    }
-    sc.close();
+        sc.close();
     }
 }
