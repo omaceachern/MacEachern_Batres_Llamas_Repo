@@ -20,7 +20,7 @@ public class Spoons {
         olivia: bono
         bono: batres
      */
-    private Map<String,Integer> statusMap;
+    public Map<String,Integer> statusMap;
     public Spoons(String pathname) throws FileNotFoundException{
         File f = new File (pathname);
         Scanner sc = new Scanner (f);
