@@ -78,6 +78,9 @@ public class Spoons {
                 faculty.add(name);
             }
         }
+
+        sc.close();
+
         //initialize target maps for each group
         targets9 = initializeTargets(nines);
         targets10 = initializeTargets(tens);
@@ -91,7 +94,7 @@ public class Spoons {
         Map<String, String> map = new HashMap<>();
         List<String> activePlayers = new ArrayList<>();
         for (String player : group) {
-            if (statusMap.get(player) == 1) {
+            if (statusMap.get(player) != null && statusMap.get(player) == 1) {
                 activePlayers.add(player);
             }
         }
@@ -105,7 +108,7 @@ public class Spoons {
     }
 
     public int getStatus(String name){
-        return statusMap.get(name);
+        return statusMap.getOrDefault(name, 0);
     }
 
         //Returns the target for a player based on their group
@@ -120,7 +123,7 @@ public class Spoons {
     
         //Eliminate a player and update only their group map
         public void eliminatePlayer(String name) {
-            if (statusMap.get(name) != 1) return; // already eliminated
+            if (!statusMap.containsKey(name) || statusMap.get(name) != 1) return; // already eliminated
             statusMap.put(name, 0);
     
             if (nines.contains(name)) targets9 = initializeTargets(nines);
