@@ -1,5 +1,6 @@
 package MacEachern_Batres_Llamas_Repo;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class MainTester {
@@ -17,7 +18,7 @@ public class MainTester {
                 eliminated someone*
                     go into spoon and change map*/
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
         // ask for user info
         System.out.print("What is your last name? (Please enter in the following format: Batres): ");
@@ -28,14 +29,7 @@ public class MainTester {
         sc.nextLine();
 
         //creates spoons object
-        Spoons game = null;
-        try {
-            game = new Spoons("MacEachern_Batres_Llamas_Repo/Spoon_Sample_Data - Sheet1.csv");
-        } catch (Exception exception) {
-            System.out.println("Error!: " + exception.getMessage());
-            sc.close();
-            return;
-        }
+        Spoons game = new Spoons("MacEachern_Batres_Llamas_Repo/Spoon_Sample_Data - Sheet1.csv");
 
         //create a students object for the player
         Students player = new Students(name,grade);
@@ -43,7 +37,7 @@ public class MainTester {
         //check player's status
         int status = game.getStatus(player.getName());
 
-        if (status != 0) {
+        if (status == 0) {
             System.out.println("Sorry, "+player.getName()+" you have been eliminated!");
             sc.close();
             return;

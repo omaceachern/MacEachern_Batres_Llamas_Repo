@@ -101,7 +101,7 @@ public class Spoons {
     }
 
     public int getStatus(String name){
-        return statusMap.getOrDefault(name, 0);
+        return statusMap.get(name);
     }
 
     //Returns the target for a player based on their group
@@ -169,7 +169,7 @@ public boolean isLastPlayerInGroup(String name) {
     if (group == null) {
         return false; // safety check
     }
-    
+
     int activeCount = 0;
     for (String player : group) {
         if (statusMap.get(player) != null && statusMap.get(player) == 1) {
