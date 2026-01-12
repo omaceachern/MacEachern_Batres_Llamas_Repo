@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Spoons {
@@ -18,6 +20,7 @@ public class Spoons {
         olivia: bono
         bono: batres
      */
+    private Map<String,Integer> statusMap;
     public Spoons(String pathname) throws FileNotFoundException{
         File f = new File (pathname);
         Scanner sc = new Scanner (f);
@@ -32,12 +35,16 @@ public class Spoons {
         ArrayList <String> twelves = new ArrayList<>();
         ArrayList <String> faculty = new ArrayList<>();
         
+        statusMap = new HashMap<>();
 
         while (sc.hasNextLine()) {
             ArrayList<String> line = new ArrayList<>(Arrays.asList(sc.nextLine().split(",")));
 
             String name = line.get(name_idx);
             Integer grade = Integer.parseInt(line.get(grade_idx));
+
+            Integer status=Integer.parseInt(line.get(status_idx));
+            statusMap.put(name, status);
 
             if (grade.equals(9)) {
                 nines.add(name);
@@ -52,17 +59,19 @@ public class Spoons {
             }
 
         }
+    }
+    public Map<String, String> assignTargets(ArrayList<String> names){
+        Map<String, String> toRet = new HashMap<>();
+        for (int i=0;i<names.size();i++){
+            String player =names.get(i);
+            String target = names.get((i+1)%names.size());
 
-        /*assigns students by grade or if they are faculty
-    maps: keys: everyone playing, value: thier target (next on list)
-    find as key on map. value will be the eliminated players value
-    ex:
-    Batres: itzel
-    itzel: olivia
-    olivia: bono
-    bono: batres*/
+            toRet.put(player,target);
+        }
+        return toRet;
+    }
 
-        
-
+    public int getStatus(String name){
+        return statusMap.get(name);
     }
 }
