@@ -106,6 +106,9 @@ public class Spoons {
 
     //Returns the target for a player based on their group
     public String getTarget(String name) {
+        if (isLastPlayerInGroup(name)){
+            return null;
+        }
         if (nines.contains(name)) {
             return targets9.get(name);
         }

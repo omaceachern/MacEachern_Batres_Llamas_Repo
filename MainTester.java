@@ -79,9 +79,11 @@ public class MainTester {
                 if (game.isLastPlayerInGroup(player.getName())) {
                     System.out.println("Congratulations " + player.getName() + "! You are the winner!");
                 }
-                String newTarget = game.getTarget(player.getName());
-                if (newTarget != null) {
-                    System.out.println("Your current target is now: " + newTarget);
+                String target = game.getTarget(player.getName());
+                if (target == null) {
+                    System.out.println("Congratulations " + player.getName() + "! You are the winner of your group!");
+                } else {
+                    System.out.println("Your current target is: " + target);
                 }
             } else if (choice == 2) {
                 System.out.print("Enter the name of the person you eliminated: ");
@@ -93,7 +95,12 @@ public class MainTester {
                         System.out.println("Congratulations " + target + "! They are the winner of their group!");
                     }
                     //shows the updated target for the current player
-                    System.out.println("Your current target is now: " + game.getTarget(player.getName()));
+                    String nextTarget = game.getTarget(player.getName());
+                    if (nextTarget == null) {
+                        System.out.println("Congratulations " + player.getName() + "! You are the winner of your group!");
+                    } else {
+                        System.out.println("Your current target is now: " + nextTarget);
+                    }
                     // to wait before next turn
                     System.out.println("\nPress Enter to end your turn and pass to the next player...");
                     sc.nextLine(); // waits for user to hit enter
