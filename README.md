@@ -1,7 +1,7 @@
 # Title
 **THE SPOON GAME**
 ## Authors
-Vitcoria, Olivia, Itzel
+Victoria, Olivia, Itzel
 ## Description
 We are trying to create a program for the Spoon Game to keep track of current active players and those who are eliminated. Within this system, students will be able to self report themselves as eliminated or successful and the automatically be given their next target
 The target user would be anyone participating in the spoon game including forum, students, and faculty
