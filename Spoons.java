@@ -101,7 +101,7 @@ public class Spoons {
     }
 
     public int getStatus(String name){
-        return statusMap.get(name);
+        return statusMap.getOrDefault(name,0);
     }
 
     //Returns the target for a player based on their group
