@@ -27,6 +27,9 @@ public class MainTester {
         System.out.println("Welcome to the Spoon Game!");
 
         while (true) {
+             // clear the terminal
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
             // ask for user info
             System.out.print("\nWhat is your last name? (Please enter in the following format: Batres): ");
             String name = sc.nextLine().trim();
@@ -85,6 +88,8 @@ public class MainTester {
                     if (game.isLastPlayerInGroup(target)) {
                         System.out.println("Congratulations " + target + "! They are the winner of their group!");
                     }
+                    //shows the updated target for the current player
+                    System.out.println("Your current target is now: " + game.getTarget(player.getName()));
                 } else {
                     System.out.println("Invalid target or already eliminated.");
                 }
