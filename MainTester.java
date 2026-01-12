@@ -44,6 +44,26 @@ public class MainTester {
         }
 
         System.out.println("Welcome " + player.getName() + "! You are still in the game.");
+        
+        while (true) {
+            //Check if all groups have winners*
+            String winner9 = game.getWinnerInGroup(game.getNines());
+            String winner10 = game.getWinnerInGroup(game.getTens());
+            String winner11 = game.getWinnerInGroup(game.getElevens());
+            String winner12 = game.getWinnerInGroup(game.getTwelves());
+            String winnerFaculty = game.getWinnerInGroup(game.getFaculty());
+
+            if (winner9 != null && winner10 != null && winner11 != null &&
+                winner12 != null && winnerFaculty != null) {
+                System.out.println("\nGame Over! Winners for each group:");
+                System.out.println("9th Grade: " + winner9);
+                System.out.println("10th Grade: " + winner10);
+                System.out.println("11th Grade: " + winner11);
+                System.out.println("12th Grade: " + winner12);
+                System.out.println("Faculty: " + winnerFaculty);
+                break; // all groups have winners --> end game
+            }
+
         //show current target
         System.out.println("Your current target is: " + game.getTarget(player.getName()));
 
@@ -63,7 +83,7 @@ public class MainTester {
             if (game.isLastPlayerInGroup(player.getName())) {
                 System.out.println("Congratulations " + player.getName() + "! You are the winner!");
             }
-        } 
+        }
         else if (choice == 2) {
             System.out.print("Enter the name of the person you eliminated: ");
             String target = sc.nextLine().trim();
@@ -82,7 +102,7 @@ public class MainTester {
         else {
             System.out.println("Invalid choice.");
         }
-
-        sc.close();
+    }
+    sc.close();
     }
 }

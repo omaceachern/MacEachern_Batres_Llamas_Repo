@@ -179,6 +179,40 @@ public boolean isLastPlayerInGroup(String name) {
 
     // If only 1 active player left, and it’s name --> return true
     return activeCount == 1 && statusMap.get(name) == 1;
-}
+    }
+
+    // Returns the last active player in a group, or null if more than 1 remains
+    public String getWinnerInGroup(ArrayList<String> group) {
+        int activeCount = 0;
+        String lastPlayer = null;
+        for (String player : group) {
+            if (statusMap.get(player) != null && statusMap.get(player) == 1) {
+                activeCount++;
+                lastPlayer = player;
+            }
+        }
+        if (activeCount == 1) {
+            return lastPlayer;
+        } else {
+            return null;
+        }
+    }
+
+    // convenient getters for groups
+    public ArrayList<String> getNines() {
+        return nines;
+    }
+    public ArrayList<String> getTens() {
+        return tens;
+    }
+    public ArrayList<String> getElevens() {
+        return elevens;
+    }
+    public ArrayList<String> getTwelves() {
+        return twelves;
+    }
+    public ArrayList<String> getFaculty() {
+        return faculty;
+    }
 
 }
