@@ -63,10 +63,11 @@ public class MainTester {
             if (game.isLastPlayerInGroup(player.getName())) {
                 System.out.println("Congratulations " + player.getName() + "! You are the winner!");
             }
-        } else if (choice == 2) {
+        } 
+        else if (choice == 2) {
             System.out.print("Enter the name of the person you eliminated: ");
-            String target = sc.nextLine();
-            if (game.getStatus(target) == 0) {
+            String target = sc.nextLine().trim();
+            if (game.getStatus(target) == 1) {
                 game.eliminatePlayer(target);
                 System.out.println(target + " has been eliminated.");
 
@@ -77,7 +78,8 @@ public class MainTester {
             } else {
                 System.out.println("Invalid target or already eliminated.");
             }
-        } else {
+        }
+        else {
             System.out.println("Invalid choice.");
         }
 
