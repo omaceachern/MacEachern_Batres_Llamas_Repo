@@ -1,7 +1,7 @@
 package MacEachern_Batres_Llamas_Repo;
 public class Students {
-    /*constructor with name and grade
-    have a method that gets from Spoon class if they are elimated */
+    /*contains a constructor that creates a Student object and
+    a 2 methods to get said student's name and grade. This makes the code safer. */
     private String name;
     private int grade;
     public Students(String name, int grade) {
