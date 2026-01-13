@@ -45,12 +45,13 @@ public class MainTester {
                 continue;
             }
 
-            //create a students object for the player
+            //create a Students object for the current player
             Students player = new Students(name, grade);
 
             //check player's status
             int status = game.getStatus(player.getName());
 
+            // if they are eliminated:
             if (status == 0) {
                 System.out.println("Sorry, " + player.getName() + " you have been eliminated!");
                 System.out.println("\nPress Enter to continue...");
@@ -58,25 +59,31 @@ public class MainTester {
                 continue; // next player's turn
             }
 
+            //if they are not eliminated
             System.out.println("Welcome " + player.getName() + "! You are still in the game.");
 
             //show current target
             System.out.println("Your current target is: " + game.getTarget(player.getName()));
 
             //offer actions
-            System.out.println("Choose an action:");
+            System.out.println("Choose an action by typing in the #:");
             System.out.println("1. Self-report elimination");
             System.out.println("2. Report someone else as eliminated");
 
             String input = sc.nextLine().trim(); //reads what the user types
             int choice = 0;
+
+            //prevents a number format exception and makes code safer
             try {
                 choice = Integer.parseInt(input); //convert input to integer
             } catch (NumberFormatException exception) {
                 choice = -1; // invalid input
             }
 
-            //Use eliminatePlayer() to update only the correct group
+            //Use eliminatePlayer() to update only the correct group once the user inputs if they want to report someone else as eliminated or
+            //report themselves as eliminated
+
+            //if they want to self-report
             if (choice == 1) {
                 game.eliminatePlayer(player.getName());
                 System.out.println(player.getName() + " has been eliminated.");
@@ -84,9 +91,12 @@ public class MainTester {
                 System.out.println("\nPress Enter to end your turn...");
                 sc.nextLine();
             }
+
+            //if they want to report someone else
             else if (choice == 2) {
                 System.out.print("Enter the name of the person you eliminated: ");
                 String target = sc.nextLine().trim();
+                //if they are still in the game --> eliminated them
                 if (game.getStatus(target) == 1) {
                     game.eliminatePlayer(target);
                     System.out.println(target + " has been eliminated.");
@@ -103,38 +113,44 @@ public class MainTester {
                     // to wait before next turn
                     System.out.println("\nPress Enter to end your turn and pass to the next player...");
                     sc.nextLine(); // waits for user to hit enter
+
+                //if they are not in the game or there is another issue
                 } else {
                     System.out.println("Invalid target or already eliminated.");
                     System.out.println("\nPress Enter to end your turn...");
                     sc.nextLine();
                 }
+            //if they do not input a valid choice--> skips their turn and resets
             } else {
                 System.out.println("Invalid choice. Turn skipped.");
                 System.out.println("\nPress Enter to continue...");
                 sc.nextLine();
             }
 
-            // Check if all groups have winners
+            // To check if all groups have winners: a String of the name of the player, obtained mainly by using
+            //the getWinnerInGroup method
             String winner9 = game.getWinnerInGroup(game.getNines());
             String winner10 = game.getWinnerInGroup(game.getTens());
             String winner11 = game.getWinnerInGroup(game.getElevens());
             String winner12 = game.getWinnerInGroup(game.getTwelves());
             String winnerFaculty = game.getWinnerInGroup(game.getFaculty());
 
+            //checks at the end of each round if all categories have been won.
             if (winner9 != null && winner10 != null && winner11 != null &&
                 winner12 != null && winnerFaculty != null) {
+                //prints out the winners for each group
                 System.out.println("\nGame Over! Winners for each group:");
                 System.out.println("9th Grade: " + winner9);
                 System.out.println("10th Grade: " + winner10);
                 System.out.println("11th Grade: " + winner11);
                 System.out.println("12th Grade: " + winner12);
                 System.out.println("Faculty: " + winnerFaculty);
-                System.out.println("\nPress Enter to continue...");
+                System.out.println("\nPress Enter to exit the game...");
                 sc.nextLine();
                 break;
             }
         }
-
+        //closes scanner
         sc.close();
     }
 }
