@@ -94,6 +94,8 @@ public class MainTester {
                     if (game.isLastPlayerInGroup(target)) {
                         System.out.println("Congratulations " + target + "! They are the winner of their group!");
                     }
+                    System.out.println("\nPress Enter to end your turn..."); //changed bottom two lines
+                    sc.nextLine();
                     //shows the updated target for the current player
                     String nextTarget = game.getTarget(player.getName());
                     if (nextTarget == null) {
