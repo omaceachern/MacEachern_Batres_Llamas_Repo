@@ -86,21 +86,21 @@ public class Spoons {
         targets11 = initializeTargets(elevens);
         targets12 = initializeTargets(twelves);
         targetsFaculty = initializeTargets(faculty);
-    }
+    } //end of constructor
 
 
-
-
-    // create a map for a given list of active players
+    // create a map for a given list of active players, containing the player and their target
     private Map<String, String> initializeTargets(ArrayList<String> group) {
         Map<String, String> map = new HashMap<>();
         List<String> activePlayers = new ArrayList<>();
+        //checks that the player exists and is not out or eliminated
         for (String player : group) {
             if (statusMap.get(player) != null && statusMap.get(player) == 1) {
                 activePlayers.add(player);
             }
         }
 
+        //fills the map correctly with they key and value of player/target
         for (int i = 0; i < activePlayers.size(); i++) {
             String player = activePlayers.get(i);
             String target = activePlayers.get((i + 1) % activePlayers.size());
