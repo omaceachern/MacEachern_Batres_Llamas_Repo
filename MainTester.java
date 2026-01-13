@@ -2,9 +2,11 @@ package MacEachern_Batres_Llamas_Repo;
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
+/*The MainTester class serves as a controller and handles the input and output. 
+    In this class, it creates a player using user input of their name and grade/faculty.
+    It allows users to report eliminations, see their target, and communicates with the Spoon class to run the game.*/
 public class MainTester {
-    /*asks the user their name and grade
+    /*outline: asks the user their name and grade
         constructs a student
         also create a spoon object to use
         also automatically gives them their status
@@ -21,35 +23,25 @@ public class MainTester {
     public static void main(String[] args) throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
 
-        //creates Spoons object
+        //creates spoons object
         Spoons game = new Spoons("MacEachern_Batres_Llamas_Repo/Spoon_Sample_Data - Sheet1.csv");
 
         System.out.println("Welcome to the Spoon Game!");
 
         while (true) {
-             // clear the terminal after each player's turn to model the secrecy of the real game
+             // clear the terminal
             System.out.print("\033[H\033[2J");
             System.out.flush();
-
             // ask for user info
             System.out.print("\nWhat is your last name? (Please enter in the following format: Batres): ");
-
-            //.trim() is used throughout the code to reduce errors
             String name = sc.nextLine().trim();
 
             System.out.print("Enter your grade (9-12) or 0 if faculty: ");
             int grade = 0;
-
-            //another block of code meant to reduce errors: if the user inputs a number not accepted/
-            // linked to a grade/faculty, their turn will be skipped. ensures that they will see the error message by
-            // requiring them to press enter before continuing (used throughout the code as well to prevent the message from being cleared before
-            // the user can see it).
             try {
                 grade = Integer.parseInt(sc.nextLine().trim());
             } catch (NumberFormatException exception) {
                 System.out.println("Invalid grade. Turn skipped.");
-                System.out.println("\nPress Enter to continue...");
-                sc.nextLine();
                 continue;
             }
 

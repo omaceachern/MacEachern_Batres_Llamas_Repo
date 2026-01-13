@@ -7,9 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-
+    /* The Spoons class reads the csv file and groups each student by grade level--keeping track of their name, grade, and status.
+        It has the capability to keep track of if their eliminated or not, assigns and updates a target for each player, and dermines a winner for each grade/faculty */
 public class Spoons {
-    /*Contains the data from the file and methods to access it
+    /* outline: Contains the data from the file and methods to access it
     make an array list of students in 9,10,11,12, and faculty
     assigns students by grade or if they are faculty
     maps: keys: everyone playing, value: thier target (next on list)
@@ -109,13 +110,11 @@ public class Spoons {
         return map;
     }
 
-    //getter mehthod so the status of a given player is easily accessible
     public int getStatus(String name){
         return statusMap.getOrDefault(name,0);
     }
 
-    //Returns the target for a player based on their group; returns null if they are the last player in their group
-    //otherwise, it returns their target based off of their grade and the map of targets
+    //Returns the target for a player based on their group
     public String getTarget(String name) {
         if (isLastPlayerInGroup(name)){
             return null;
@@ -138,8 +137,7 @@ public class Spoons {
         return null;
     }
     
-    //Eliminate a player and update only their group (grade or faculty) map
-    //also utilizes initialize targets to update the pool of players
+    //Eliminate a player and update only their group map
     public void eliminatePlayer(String name) {
         if (!statusMap.containsKey(name) || statusMap.get(name) != 1) return; // already eliminated
         statusMap.put(name, 0);
@@ -185,7 +183,6 @@ public boolean isLastPlayerInGroup(String name) {
         return false; // safety check
     }
 
-    //counts the number of players in the game in a group
     int activeCount = 0;
     for (String player : group) {
         if (statusMap.get(player) != null && statusMap.get(player) == 1) {
@@ -195,7 +192,7 @@ public boolean isLastPlayerInGroup(String name) {
 
     // If only 1 active player left, and it’s name --> return true
     return activeCount == 1 && statusMap.get(name) == 1;
-}
+    }
 
     // Returns the last active player in a group, or null if more than 1 remains
     public String getWinnerInGroup(ArrayList<String> group) {
