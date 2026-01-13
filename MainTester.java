@@ -51,6 +51,8 @@ public class MainTester {
 
             if (status == 0) {
                 System.out.println("Sorry, " + player.getName() + " you have been eliminated!");
+                System.out.println("\nPress Enter to continue...");
+                sc.nextLine();
                 continue; // next player's turn
             }
 
@@ -76,15 +78,14 @@ public class MainTester {
             if (choice == 1) {
                 game.eliminatePlayer(player.getName());
                 System.out.println(player.getName() + " has been eliminated.");
-                if (game.isLastPlayerInGroup(player.getName())) {
-                    System.out.println("Congratulations " + player.getName() + "! You are the winner!");
-                }
                 String target = game.getTarget(player.getName());
                 if (target == null) {
                     System.out.println("Congratulations " + player.getName() + "! You are the winner of your group!");
                 } else {
                     System.out.println("Your current target is: " + target);
                 }
+                System.out.println("\nPress Enter to end your turn...");
+                sc.nextLine();
             } else if (choice == 2) {
                 System.out.print("Enter the name of the person you eliminated: ");
                 String target = sc.nextLine().trim();
@@ -94,8 +95,6 @@ public class MainTester {
                     if (game.isLastPlayerInGroup(target)) {
                         System.out.println("Congratulations " + target + "! They are the winner of their group!");
                     }
-                    System.out.println("\nPress Enter to end your turn..."); //changed bottom two lines
-                    sc.nextLine();
                     //shows the updated target for the current player
                     String nextTarget = game.getTarget(player.getName());
                     if (nextTarget == null) {
@@ -115,6 +114,8 @@ public class MainTester {
                 }
             } else {
                 System.out.println("Invalid choice. Turn skipped.");
+                System.out.println("\nPress Enter to continue...");
+                sc.nextLine();
             }
 
             // Check if all groups have winners
@@ -132,6 +133,8 @@ public class MainTester {
                 System.out.println("11th Grade: " + winner11);
                 System.out.println("12th Grade: " + winner12);
                 System.out.println("Faculty: " + winnerFaculty);
+                System.out.println("\nPress Enter to continue...");
+                sc.nextLine();
                 break;
             }
         }
