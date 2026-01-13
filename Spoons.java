@@ -23,26 +23,32 @@ public class Spoons {
 
     private Map<String, Integer> statusMap;  // Tracks eliminated status
 
+    //ArrayList of all the ninth graders
     private ArrayList<String> nines;
     private ArrayList<String> tens;
     private ArrayList<String> elevens;
     private ArrayList<String> twelves;
     private ArrayList<String> faculty;
 
+    //a map that holds the targets
     private Map<String, String> targets9;
     private Map<String, String> targets10;
     private Map<String, String> targets11;
     private Map<String, String> targets12;
     private Map<String, String> targetsFaculty;
 
+    // the constructor for a spoons object, which in our code, is a round or game of Spoons
     public Spoons(String pathname) throws FileNotFoundException{
+        //going through csv
         File f = new File (pathname);
         Scanner sc = new Scanner (f);
         String [] header = sc.nextLine().split(",");
+        //assigning the indeces to information about a student
         int name_idx=0;
         int grade_idx=1;
         int status_idx=2;
         
+        //instantiates statusMap and arraylists made earlier of all student/faculty
         statusMap = new HashMap<>();
         nines = new ArrayList<>();
         tens = new ArrayList<>();
@@ -50,7 +56,7 @@ public class Spoons {
         twelves = new ArrayList<>();
         faculty = new ArrayList<>();
 
-
+        //while loop that fills the arraylists created above with the participants according to grade
         while (sc.hasNextLine()) {
             String[]line = sc.nextLine().split(",");
             String name = line[name_idx].trim();
@@ -71,7 +77,7 @@ public class Spoons {
                 faculty.add(name);
             }
         }
-
+        //closing scanner
         sc.close();
 
         //initialize target maps for each group
@@ -81,6 +87,9 @@ public class Spoons {
         targets12 = initializeTargets(twelves);
         targetsFaculty = initializeTargets(faculty);
     }
+
+
+
 
     // create a map for a given list of active players
     private Map<String, String> initializeTargets(ArrayList<String> group) {
