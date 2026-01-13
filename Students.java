@@ -5,13 +5,14 @@ public class Students {
     private String name;
     private int grade;
     public Students(String name, int grade) {
-    this.name = name;
-    this.grade = grade;
+        this.name = name;
+        this.grade = grade;
     }
     public String getName() {
-    return name;
+        return name;
     }
     public int getGrade() {
-    return grade;
+        return grade;
     }
+    
 }
